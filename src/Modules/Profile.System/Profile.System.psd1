@@ -2,7 +2,7 @@
     RootModule           = 'Profile.System.psm1'
     ModuleVersion        = '1.0.0'
     GUID                 = 'a620844e-3a9e-47b0-be3b-9da4ad84e379'
-    Author               = 'Personal'
+    Author               = 'Yitzhak B. Solórzano'
     Description          = 'System, disk, and process objects for the personal PowerShell profile.'
     PowerShellVersion    = '5.1'
     CompatiblePSEditions = @('Desktop', 'Core')
@@ -15,5 +15,10 @@
     CmdletsToExport      = @()
     VariablesToExport    = @()
     AliasesToExport      = @('uptime', 'df', 'proc', 'sysinfo')
-    FormatsToProcess     = @('Profile.System.Format.ps1xml')
+    FormatsToProcess     = @('Formats/Profile.System.format.ps1xml')
+    PrivateData          = @{
+        PSData = @{
+            ProjectUri = 'https://github.com/betancour/powershell'
+        }
+    }
 }

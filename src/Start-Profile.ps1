@@ -1,14 +1,15 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-    Personal PowerShell startup.
+    Shared profile startup.
 
 .DESCRIPTION
-    Shared startup used by profile.ps1. The console entry point is
-    Microsoft.PowerShell_profile.ps1. Both load this file once per session.
+    Loaded once per session by profiles/CurrentUserAllHosts.ps1. The console
+    entry point is profiles/CurrentUserCurrentHost.ps1.
 
-    uptime, df, proc, sysinfo, netinfo, and touch load their modules on first use.
-    Execution policy is left alone. Set it once, outside this script, if you need to:
+    uptime, df, proc, sysinfo, netinfo, and touch load their modules on first
+    use. Execution policy is left alone. Set it once, outside this script,
+    if you need to:
 
         Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 #>
@@ -17,7 +18,7 @@ if ($global:ProfileStartupLoaded) {
     return
 }
 
-$moduleRoot = Join-Path (Join-Path $PSScriptRoot 'src') 'Modules'
+$moduleRoot = Join-Path $PSScriptRoot 'Modules'
 if (-not (Test-Path -LiteralPath $moduleRoot -PathType Container)) {
     Write-Warning "Profile modules were not found: $moduleRoot"
     return
@@ -51,7 +52,8 @@ if (-not $modulePathReady) {
 
 Import-Module -Name 'Profile.Core' -DisableNameChecking -ErrorAction Stop
 
-$settingsPath = Join-Path (Join-Path $PSScriptRoot 'config') 'profile.settings.psd1'
+$repoRoot = Split-Path -Parent $PSScriptRoot
+$settingsPath = Join-Path (Join-Path $repoRoot 'config') 'settings.psd1'
 $promptInit = Initialize-ProfileShell -SettingsPath $settingsPath
 
 if ($global:ProfileUseChocolateyCompleter -and -not $global:ProfileChocolateyCompleterRegistered) {

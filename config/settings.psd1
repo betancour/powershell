@@ -5,13 +5,13 @@
 
     # Absolute directories appended to the process PATH.
     # Missing, relative, UNC, drive-root, and world-writable entries are skipped.
-    # The old placeholder C:\Path\To\Scripts was removed on purpose.
     PathEntries = @()
 
     # Register Chocolatey completion on first Tab, instead of importing it at startup.
     EnableChocolateyCompletion = $true
 
     # ConsoleHost message colors. Unknown names are ignored.
+    # When this key is present, it replaces the default color map.
     HostColor = @{
         ErrorForegroundColor   = 'Red'
         WarningForegroundColor = 'Yellow'
